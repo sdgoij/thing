@@ -14,8 +14,8 @@ Installation
 
     git clone https://github.com/sdgoij/thing.git && cd thing
     php -r "readfile('https://getcomposer.org/installer');"|php
-    php composer.phar install
-    cp config/autoload/local.php.dist config/autoload/local.php
+    php composer.phar self-update && php composer.phar install
+    cp config/autoload/default.local.php.dist config/autoload/default.local.php
     ./vendor/bin/doctrine-module orm:schema-tool:create
 
 Web Server Setup
