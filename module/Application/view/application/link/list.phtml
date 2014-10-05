@@ -1,0 +1,7 @@
+<dl>
+<?php foreach ($this->pg as $link):?>
+    <?=$this->partial('partial/link.phtml', ['link' => $link])?>
+<?php endforeach?>
+</dl>
+
+<?=$this->paginationControl($this->pg, 'sliding', ['partial/paginator.phtml', 'Application'], ['route' => 'home'])?>

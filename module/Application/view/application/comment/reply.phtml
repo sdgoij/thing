@@ -1,0 +1,17 @@
+<dl><?=$this->partial($this->header, [
+    'comment' => $this->comment,
+    'link' => $this->link,
+])?></dl>
+
+<?php
+$form = $this->form;
+$params = ['link' => $form->get('link')->getValue()];
+if ($parent = $form->get('parent')->getValue()):
+    $params['parent'] = $parent;
+endif;
+
+$form->setAttribute('action', $this->url('reply', $params));
+$form->prepare();
+?>
+
+<?=$this->form()->render($form)?>

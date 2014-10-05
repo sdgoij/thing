@@ -1,0 +1,18 @@
+{
+    "name": "sdgoij/thing",
+    "description": "Thing for things",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "thing",
+        "stuff"
+    ],
+    "homepage": "http://github.com/sdgoij/thing",
+    "require": {
+        "php": ">=5.4.0",
+        "zendframework/zendframework": "2.3.*",
+        "zendframework/zend-developer-tools": "dev-master",
+        "doctrine/doctrine-module": "0.*",
+        "doctrine/doctrine-orm-module": "*",
+        "neilime/zf2-twb-bundle": "2.*@stable"
+    }
+}

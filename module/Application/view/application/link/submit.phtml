@@ -1,0 +1,10 @@
+<?php $form = $this->form ?>
+<h1><?=$this->translate('Submit a new link')?></h1>
+<hr>
+
+<?php
+$form->setAttribute('action', $this->url('submit'));
+$form->prepare();
+?>
+
+<?=$this->form()->render($form)?>
