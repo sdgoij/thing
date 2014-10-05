@@ -8,6 +8,10 @@ return array(
         ),
         'aliases' => array(
             'translator' => 'MvcTranslator',
+            'Zend\Authentication\AuthenticationService' => 'auth',
+        ),
+        'factories' => array(
+            'auth' => 'Application\Factory\AuthService',
         ),
     ),
     'translator' => array(

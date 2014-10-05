@@ -74,5 +74,25 @@ return [
                 ],
             ],
         ],
+        'login' => [
+            'type' => 'literal',
+            'options' => [
+                'route' => '/login',
+                'defaults' => [
+                    'controller' => 'Application\Controller\User',
+                    'action' => 'login',
+                ],
+            ],
+        ],
+        'logout' => [
+            'type' => 'literal',
+            'options' => [
+                'route' => '/logout',
+                'defaults' => [
+                    'controller' => 'Application\Controller\User',
+                    'action' => 'logout',
+                ],
+            ],
+        ],
     ],
 ];

@@ -19,24 +19,62 @@ class ActionController extends AbstractActionController {
 
 class UserController extends ActionController {
     public function registerAction() {
-        return $this->post(new UserForm(),
-            function(Form $form) {
-                $data = $form->getdata();
-                if ($data['password'] == $data['password2']) {
-                    $user = new \Application\Entity\User();
-                    $user->setUsername($data['username']);
-                    $user->setPassword($data['password']);
-                    $user->setCreated(new \DateTime());
-                    $user->setEmail($data['email']);
+        if (!$this->getServiceLocator()->get('auth')->hasIdentity()) {
+            return $this->post(new UserForm(),
+                function(Form $form) {
+                    $data = $form->getdata();
+                    if ($data['password'] == $data['password2']) {
+                        $user = new \Application\Entity\User();
+                        $user->setUsername($data['username']);
+                        $user->setPassword($data['password']);
+                        $user->setCreated(new \DateTime());
+                        $user->setEmail($data['email']);
 
-                    $em = $this->getEntityManager();
-                    $em->persist($user);
-                    $em->flush();
+                        $em = $this->getEntityManager();
+                        $em->persist($user);
+                        $em->flush();
 
-                    $this->redirect()->toRoute('home');
+                        $this->redirect()->toRoute('home');
+                    }
+                    return ['form' => $form];
                 }
-                return ['form' => $form];
-            }
-        );
+            );
+        }
+        $this->redirect()->toRoute('home');
+        return $this->getResponse();
+    }
+
+    public function loginAction() {
+        $auth = $this->getServiceLocator()->get('auth');
+        if (!$auth->hasIdentity()) {
+            return $this->post(new LoginForm(),
+                function(Form $form) use ($auth) {
+                    $data = $form->getData();
+                    $result = $auth->getAdapter()
+                        ->setCredential($data['password'])
+                        ->setIdentity($data['username'])
+                        ->authenticate();
+                    if ($result->isValid()) {
+                        $auth->getStorage()->write($result->getIdentity());
+                        $this->redirect()->toRoute('home');
+                    }
+                    return [
+                        'errmsg' => 'Invalid username or password',
+                        'form' => $form,
+                    ];
+                }
+            );
+        }
+        $this->redirect()->toRoute('home');
+        return $this->getResponse();
+    }
+
+    public function logoutAction() {
+        $auth = $this->getServiceLocator()->get('auth');
+        if ($auth->hasIdentity()) {
+            $auth->clearIdentity();
+        }
+        $this->redirect()->toRoute('home');
+        return $this->getResponse();
     }
 }

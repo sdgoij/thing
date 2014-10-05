@@ -1,0 +1,14 @@
+<?php $form = $this->form ?>
+<h1><?=$this->translate('Login')?></h1>
+<hr>
+
+<?php
+$form->setAttribute('action', $this->url('login'));
+$form->prepare();
+?>
+
+<?php if (isset($this->errmsg)):?>
+    <p class="text-danger"><?=$this->translate($this->errmsg)?></p>
+<?php endif?>
+
+<?=$this->form()->render($form)?>

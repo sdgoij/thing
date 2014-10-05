@@ -38,6 +38,15 @@
                         <li class="active"><a href="<?=$this->url('home')?>"><?=$this->translate('Home')?></a></li>
                         <li class="active"><a href="<?=$this->url('submit')?>"><?=$this->translate('Submit')?></a></li>
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <?php if ($user = $this->identity()):?>
+                        <li class="active"><a href="#"><?=$this->escapeHtml($user->getUsername())?></a></li>
+                        <li class="active"><a href="<?=$this->url('logout')?>"><?=$this->translate('Logout')?></a></li>
+                        <?php else:?>
+                        <li class="active"><a href="<?=$this->url('register')?>"><?=$this->translate('Register')?></a></li>
+                        <li class="active"><a href="<?=$this->url('login')?>"><?=$this->translate('Login')?></a></li>
+                        <?php endif?>
+                    </ul>
                 </div>
             </div>
         </nav>

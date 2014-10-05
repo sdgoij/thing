@@ -11,4 +11,19 @@ return [
             ],
         ],
     ],
+    'session' => [
+        'config' => [
+            'class' => 'Zend\Session\Config\SessionConfig',
+            'options' => [
+                'name' => 'thing',
+            ],
+        ],
+        'storage' => 'Zend\Session\Storage\SessionArrayStorage',
+        'validators' => [
+            [
+                'Zend\Session\Validator\RemoteAddr',
+                'Zend\Session\Validator\HttpUserAgent',
+            ],
+        ],
+    ],
 ];
