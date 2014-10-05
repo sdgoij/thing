@@ -39,6 +39,11 @@ class Comment {
     protected $updated;
 
     /**
+     * @m\ManyToOne(targetEntity="User", inversedBy="comments")
+     */
+    protected $user;
+
+    /**
      * @m\OneToMany(targetEntity="Comment", mappedBy="parent", fetch="EXTRA_LAZY")
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -152,6 +157,22 @@ class Comment {
     public function addReply(Comment $comm) {
         $comm->setParent($this);
         $this->getReplies()->add($comm);
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser() {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     * @return Comment
+     */
+    public function setUser(User $user) {
+        $this->user = $user;
         return $this;
     }
 }

@@ -39,6 +39,11 @@ class Link {
     protected $comments;
 
     /**
+     * @m\ManyToOne(targetEntity="User", inversedBy="posts")
+     */
+    protected $poster;
+
+    /**
      * @return integer
      */
     public function getId() {
@@ -138,5 +143,21 @@ class Link {
         return $this->getComments()->matching(
             Criteria::create()->where(Criteria::expr()->isNull('parent'))
         );
+    }
+
+    /**
+     * @return User
+     */
+    public function getPoster() {
+        return $this->poster;
+    }
+
+    /**
+     * @param User $user
+     * #return Link
+     */
+    public function setPoster(User $user) {
+        $this->poster = $user;
+        return $this;
     }
 }
