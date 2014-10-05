@@ -24,6 +24,7 @@ return array(
         'invokables' => array(
             'Application\Controller\Comment' => 'Application\Controller\CommentController',
             'Application\Controller\Link' => 'Application\Controller\LinkController',
+            'Application\Controller\User' => 'Application\Controller\UserController',
         ),
     ),
     'view_manager' => array(

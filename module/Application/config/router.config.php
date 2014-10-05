@@ -64,5 +64,15 @@ return [
                 ],
             ],
         ],
+        'register' => [
+            'type' => 'literal',
+            'options' => [
+                'route' => '/register',
+                'defaults' => [
+                    'controller' => 'Application\Controller\User',
+                    'action' => 'register',
+                ],
+            ],
+        ],
     ],
 ];
