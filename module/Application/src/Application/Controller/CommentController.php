@@ -26,49 +26,56 @@ class CommentController extends AbstractActionController {
     }
 
     public function replyAction() {
-        $em = $this->getEntityManager();
-        $vm = new ViewModel([
-            'header' => 'partial/link.phtml',
-            'comment' => null,
-            'link' => null,
-        ]);
+        $auth = $this->getServiceLocator()->get('auth');
+        if ($auth->hasIdentity()) {
+            $em = $this->getEntityManager();
+            $vm = new ViewModel([
+                'header' => 'partial/link.phtml',
+                'comment' => null,
+                'link' => null,
+            ]);
 
-        $link = $em->find(
-            'Application\Entity\Link',
-            (int)$this->params()->fromRoute('link'));
+            $link = $em->find(
+                'Application\Entity\Link',
+                (int)$this->params()->fromRoute('link'));
 
-        if ($link === null) {
-            $vm->setTemplate('application/link/error.phtml');
-            $vm->id = $this->params()->fromRoute('link');
+            if ($link === null) {
+                $vm->setTemplate('application/link/error.phtml');
+                $vm->id = $this->params()->fromRoute('link');
+                return $vm;
+            }
+
+            $req  = $this->getRequest();
+            $form = new CommentForm();
+            $form->setData(['link' => $link->getId()]);
+
+            $parent = $this->findParentComment($link);
+            if ($parent !== null) {
+                $form->get('parent')->setValue($parent->getId());
+                $vm->header = 'partial/comment.phtml';
+                $vm->comment = $parent;
+            }
+
+            if ($req->isPost() && $form->setData($req->getPost())->isValid()) {
+                $comm = new \Application\Entity\Comment();
+                $comm->setMessage($form->get('message')->getValue());
+                $comm->setCreated(new \DateTime());
+                $comm->setUser($em->merge($auth->getIdentity()));
+                $link->addComment($comm, $parent);
+
+                $em->persist($comm);
+                $em->flush();
+
+                return $this->redirect()->toRoute('discussion', [
+                    'link' => $link->getId(),
+                ]);
+            }
+            $vm->form = $form;
+            $vm->link = $link;
             return $vm;
         }
-
-        $req  = $this->getRequest();
-        $form = new CommentForm();
-        $form->setData(['link' => $link->getId()]);
-
-        $parent = $this->findParentComment($link);
-        if ($parent !== null) {
-            $form->get('parent')->setValue($parent->getId());
-            $vm->header = 'partial/comment.phtml';
-            $vm->comment = $parent;
-        }
-
-        if ($req->isPost() && $form->setData($req->getPost())->isValid()) {
-            $comm = new \Application\Entity\Comment();
-            $comm->setMessage($form->get('message')->getValue());
-            $comm->setCreated(new \DateTime());
-            $link->addComment($comm, $parent);
-
-            $em->persist($comm);
-            $em->flush();
-
-            return $this->redirect()->toRoute('discussion', [
-                'link' => $form->get('link')->getValue()
-            ]);
-        }
-        $vm->form = $form;
-        $vm->link = $link;
+        $vm = new ViewModel();
+        $vm->setTemplate('error/unauthorized.phtml');
         return $vm;
     }
 

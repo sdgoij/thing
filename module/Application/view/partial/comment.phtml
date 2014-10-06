@@ -1,6 +1,6 @@
 <div>
     <header>
-        <a href="#"><?=$this->translate("Anonymous")?></a> -
+        <a href="#"><?=$this->escapeHtml($this->comment->getUser()->getUsername())?></a> -
         <span>
             <?=$this->translate("posted")?> <?=$this->timeago($this->comment->getCreated())?>
         </span>

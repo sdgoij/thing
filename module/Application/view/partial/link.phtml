@@ -9,6 +9,7 @@
 <dd>
     <p>
         <small>
+            <?=$this->translate('By')?> <?=$this->escapeHtml($this->link->getPoster()->getUsername())?>
             <?=$this->timeago($this->link->getCreated())?>
             <?php if ($numComments > 0):?>
             <a href="<?=$this->url("discussion", ["link" => $this->link->getId()])?>"><?=$numComments?>&nbsp;<?=$this->translatePlural("comment", "comments", $numComments)?></a>

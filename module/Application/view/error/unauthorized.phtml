@@ -1,0 +1,10 @@
+<div class="page-header">
+    <h1><?=$this->translate('Unauthorized')?> <small><?=$this->translate('to post new links or comments.')?></small></h1>
+</div>
+<div>
+	<p class="text-info"><?=$this->translate('Only authenticated users are allowed to post links and comments.')?></p>
+	<p><?=sprintf($this->translate('Please %s or %s a new user to become able to post.'),
+		'<a href="' . $this->url('login') . '">' . $this->translate('login') . '</a>',
+		'<a href="' . $this->url('register') . '">' . $this->translate('create') . '</a>'
+	)?></p>
+</div>
