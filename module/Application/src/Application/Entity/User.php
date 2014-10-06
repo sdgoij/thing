@@ -53,7 +53,7 @@ class User {
     }
 
     public function __sleep() {
-        return ['id', 'username', 'password', 'email'];
+        return ['id', 'username', 'password', 'email', 'created'];
     }
 
     /**
