@@ -13,7 +13,7 @@ class LinkController extends AbstractActionController {
     public function listAction() {
         $pg = new Paginator(new Selectable(
             $this->getEntityManager()->getRepository('Application\Entity\Link'),
-            Criteria::create()->orderBy(['id' => Criteria::DESC])));
+            Criteria::create()->orderBy(['created' => Criteria::DESC])));
         $pg->setCurrentPageNumber((int)$this->params()->fromRoute('p', 1));
         $pg->setDefaultItemCountPerPage(30);
         return ['pg' => $pg];
