@@ -94,5 +94,15 @@ return [
                 ],
             ],
         ],
+        'import' => [
+            'type' => 'literal',
+            'options' => [
+                'route' => '/import/hn',
+                'defaults' => [
+                    'controller' => 'Application\Controller\Import',
+                    'action' => 'hn',
+                ],
+            ],
+        ],
     ],
 ];

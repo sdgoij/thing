@@ -29,6 +29,7 @@ return array(
             'Application\Controller\Comment' => 'Application\Controller\CommentController',
             'Application\Controller\Link' => 'Application\Controller\LinkController',
             'Application\Controller\User' => 'Application\Controller\UserController',
+            'Application\Controller\Import' => 'Application\Controller\ImportController',
         ),
     ),
     'view_manager' => array(
