@@ -45,10 +45,7 @@ class EntityRepository implements AdapterInterface {
      */
     public function getItems($offset, $itemCountPerPage) {
         $this->criteria->setFirstResult($offset)->setMaxResults($itemCountPerPage);
-        return $this->repository->findBy([],
-            $this->criteria->getOrderings(),
-            $itemCountPerPage, $offset
-        );
+        return $this->repository->matching($this->criteria)->toArray();
     }
 
     /**
