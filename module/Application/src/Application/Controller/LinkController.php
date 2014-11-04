@@ -2,8 +2,8 @@
 namespace Application\Controller;
 
 use Application\Form\LinkForm;
+use Application\Paginator\Adapter\EntityRepository;
 use Doctrine\Common\Collections\Criteria;
-use DoctrineModule\Paginator\Adapter\Selectable;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Paginator\Paginator;
 use Zend\View\Model\ViewModel;
@@ -11,7 +11,7 @@ use Zend\View\Model\ViewModel;
 class LinkController extends AbstractActionController {
 
     public function listAction() {
-        $pg = new Paginator(new Selectable(
+        $pg = new Paginator(new EntityRepository(
             $this->getEntityManager()->getRepository('Application\Entity\Link'),
             Criteria::create()->orderBy(['created' => Criteria::DESC])));
         $pg->setCurrentPageNumber((int)$this->params()->fromRoute('p', 1));
