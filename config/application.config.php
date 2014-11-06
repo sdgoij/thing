@@ -6,7 +6,7 @@ return array(
         'TwbBundle',
         'DoctrineModule',
         'DoctrineORMModule',
-        'Application',
+        'thing',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

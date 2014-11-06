@@ -1,0 +1,22 @@
+<?php $numComments = $this->link->getComments()->count() ?>
+<dt>
+	<a href="<?=$this->url('goto', ['id' => $this->link->getId()])?>">
+		<?=$this->escapeHtml($this->link->getTitle())?></a>
+    <span class="text-muted">
+        <small>(<?=\Zend\Uri\UriFactory::factory($link->getUrl())->getHost()?>)</small>
+    </span>
+</dt>
+<dd>
+	<p>
+		<small>
+			<?=$this->translate('By')?> <?=$this->escapeHtml($this->link->getPoster()->getUsername())?>
+			<?=$this->timeago($this->link->getCreated())?>
+			<?php if ($numComments > 0): ?>
+				<a href="<?=$this->url("discussion", ["link" => $this->link->getId()])?>"><?=$numComments?>
+					&nbsp;<?=$this->translatePlural("comment", "comments", $numComments)?></a>
+			<?php else: ?>
+				<a href="<?=$this->url("reply", ["link" => $this->link->getId()])?>"><?=$this->translate("discuss")?></a>
+			<?php endif ?>
+		</small>
+	</p>
+</dd>
