@@ -12,3 +12,4 @@ config/local.php
 config/autoload/*.local.php
 data/*
 vendor/*
+.vagrant/*

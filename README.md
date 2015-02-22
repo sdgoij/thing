@@ -9,6 +9,22 @@ and [Doctrine2](http://doctrine-project.org/).
 
 ![Screenshot](thing.png)
 
+Running
+-------
+
+The easiest way to get this thing setup and running is by using [Docker](https://www.docker.com/) or [Vagrant](https://www.vagrantup.com/).
+
+**Docker**
+
+    git clone https://github.com/sdgoij/thing.git && cd thing
+    docker build -t sdgoij/thing . && docker run -p 8000:80 -d sdgoij/thing
+
+**Vagrant**
+
+    git clone https://github.com/sdgoij/thing.git && cd thing
+    vagrant up && open http://localhost:8000/
+
+
 Installation
 ------------
 
