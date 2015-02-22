@@ -2,10 +2,6 @@
 return [
 	'router' => require __DIR__ . '/router.config.php',
 	'service_manager' => [
-		'abstract_factories' => [
-			'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
-			'Zend\Log\LoggerAbstractServiceFactory',
-		],
 		'aliases' => [
 			'Zend\Authentication\AuthenticationService' => 'auth',
 		],
@@ -22,17 +18,6 @@ return [
 		],
 	],
 	'view_manager' => [
-		'display_not_found_reason' => true,
-		'display_exceptions' => true,
-		'doctype' => 'HTML5',
-		'not_found_template' => 'error/404',
-		'exception_template' => 'error/index',
-		'template_map' => [
-			'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
-			'thing/link/list' => __DIR__ . '/../view/thing/link/list.phtml',
-			'error/404' => __DIR__ . '/../view/error/404.phtml',
-			'error/index' => __DIR__ . '/../view/error/index.phtml',
-		],
 		'template_path_stack' => [
 			__DIR__ . '/../view',
 		],
@@ -40,11 +25,6 @@ return [
 	'view_helpers' => [
 		'invokables' => [
 			'timeago' => 'thing\view\helper\TimeAgo',
-		],
-	],
-	'console' => [
-		'router' => [
-			'routes' => [],
 		],
 	],
 	'doctrine' => [

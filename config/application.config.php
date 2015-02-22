@@ -6,6 +6,7 @@ return array(
         'TwbBundle',
         'DoctrineModule',
         'DoctrineORMModule',
+        'Application',
         'thing',
     ),
 
