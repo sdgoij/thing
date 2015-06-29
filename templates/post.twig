@@ -1,0 +1,19 @@
+{% set numComments = post.comments|length %}
+<dt>
+	<a href="{{ path('redirect', {'id': post.id}) }}">{{ post.title|e }}</a>
+	<span class="text-muted">
+		<small>({{ post.hostname|e }})</small>
+	</span>
+</dt>
+<dd>
+	<p>
+		<small>
+			By {{ post.poster.username|e }} at {{ post.created|date }}
+			{% if numComments > 0 %}
+				<a href="{{ path('discussion', {'id': post.id}) }}">{{ numComments }} comment{% if numComments > 1 %}s{% endif %}</a>
+			{% else %}
+				<a href="{{ path('reply', {'id': post.id}) }}">discuss</a>
+			{% endif %}
+		</small>
+	</p>
+</dd>

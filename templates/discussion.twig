@@ -1,0 +1,29 @@
+{% extends "layout.twig" %}
+{% block title %}Discussion{% endblock %}
+{% from _self import thread %}
+
+{% block content %}
+	<dl>{% include "post.twig" with {"post": post} only %}</dl>
+	{{ form(form) }}
+	<hr>
+	{% if threads %}
+		<ul>
+			{% for thread in threads %}
+				{{ thread(thread) }}
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}
+
+{% macro thread(comment) %}
+	<li>
+		{% include "comment.twig" with {"comment": comment} only %}
+		{% if comment.replies|length %}
+			<ul>
+				{% for reply in comment.replies %}
+					{{ _self.thread(reply) }}
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</li>
+{% endmacro %}

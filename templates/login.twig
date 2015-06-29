@@ -1,0 +1,7 @@
+{% extends "layout.twig" %}
+{% block title %}User login{% endblock %}
+
+{% block content %}
+	{% if error %}<p>{{ error }}</p>{% endif %}
+	{{ form(form) }}
+{% endblock %}

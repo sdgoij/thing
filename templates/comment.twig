@@ -1,0 +1,14 @@
+<div>
+	<header>
+		<a href="#">{{ comment.user.username|e }}</a> - <span>posted {{ comment.created|date }}</span>
+	</header>
+	<p>{{ comment.message|e }}</p>
+	<p>
+		<small>
+			<a href="{{ path('reply', {
+				'parent': comment.id,
+				'id': comment.post.id
+			}) }}">Reply</a>
+		</small>
+	</p>
+</div>

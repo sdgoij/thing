@@ -1,0 +1,10 @@
+{% extends "layout.twig" %}
+{% block title %}Show Posts{% endblock %}
+{% block content %}
+	<dl>
+		{% for post in posts %}
+			{% include "post.twig" with {'post': post} only %}
+		{% endfor %}
+	</dl>
+	{{ knp_pagination_render(posts) }}
+{% endblock %}

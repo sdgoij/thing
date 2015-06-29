@@ -4,7 +4,7 @@ Thing
 Introduction
 ------------
 This [thing](https://github.com/sdgoij/thing) is a [Hacker News](https://news.ycombinator.com/)-like
-application, written in [PHP5](http://php.net/). Using [Zend Framework 2](http://framework.zend.com/)
+application, written in [PHP5](http://php.net/). Using [Silex](http://silex.sensiolabs.org/)
 and [Doctrine2](http://doctrine-project.org/).
 
 ![Screenshot](thing.png)
@@ -30,13 +30,13 @@ Installation
 
 **Requirements:**
 
-- PHP >= 5.5.0 + SQLite extension
+- PHP >= 5.6.0 + SQLite extension
 - Git >= 1.8.0
 
 ```
 git clone https://github.com/sdgoij/thing.git && cd thing
 php -r "readfile('https://getcomposer.org/installer');"|php
-php composer.phar self-update && php composer.phar install
+php composer.phar install
 cp config/autoload/default.local.php.dist config/autoload/default.local.php
 mkdir data && ./vendor/bin/doctrine-module orm:schema-tool:create
 ```
