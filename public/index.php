@@ -29,6 +29,9 @@ $app->register(new TwigServiceProvider(), [
 		'templates',
 		'vendor/braincrafted/bootstrap-bundle/Braincrafted/Bundle/BootstrapBundle/Resources/views/Form',
 	],
+	'twig.options' => [
+		'cache' => DATA_DIR . '/twig',
+	],
 	'twig.form.templates' => ['bootstrap.html.twig'],
 ]);
 
